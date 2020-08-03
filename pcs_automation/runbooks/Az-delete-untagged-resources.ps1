@@ -38,9 +38,9 @@ $resources = Get-AzResource
 
 foreach($resource in $resources)
 {
-    if ($resource.Tags['deployment'] -ne "terraform_cloud")
+    if ($resource.Tags['deployment'] -eq $null)
     {
         write-host "removing resource:" $resource.name
-        Remove-AzResource -ResourceId $resource.id -Force
+        #Remove-AzResource -ResourceId $resource.id -Force
     }
 }
