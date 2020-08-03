@@ -3,16 +3,16 @@ resource "azurerm_resource_group" "this" {
   location = var.module_info.location
 }
 
-module "database" {
-  source  = "app.terraform.io/malleynet/database/mysql"
-  version = "0.0.1"
+# module "database" {
+#   source  = "app.terraform.io/malleynet/database/mysql"
+#   version = "0.0.1"
 
-  db_name = var.module_info.application
-  mariadb_server_fqdn = var.mariadb_server_fqdn
-  mariadb_server_name = var.mariadb_server_name
-  mariadb_server_password = var.mariadb_server_password
-  mariadb_server_username = var.mariadb_server_username
-}
+#   db_name = var.module_info.application
+#   mariadb_server_fqdn = var.mariadb_server_fqdn
+#   mariadb_server_name = var.mariadb_server_name
+#   mariadb_server_password = var.mariadb_server_password
+#   mariadb_server_username = var.mariadb_server_username
+# }
 
 module "storage" {
   source                   = "app.terraform.io/malleynet/storage/azurerm"
