@@ -29,16 +29,16 @@ module "pcs_networking" {
   }  
 }
 
-# module "pcs_automation" {
-#   source                = "./pcs_automation"
+module "pcs_automation" {
+  source                = "./pcs_automation"
   
-#   workspace_tags        = var.workspace_tags
-#   module_info = {
-#     application         = "automation" 
-#     location            = "AustraliaSoutheast"
-#     type                = "platform_common services"
-#   }  
-# }
+  workspace_tags        = var.workspace_tags
+  module_info = {
+    application         = "automation" 
+    location            = "AustraliaSoutheast"
+    type                = "platform_common services"
+  }  
+}
 
 module "pcs_app-service" {
   source                = "./pcs_app-service"
