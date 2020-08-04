@@ -18,8 +18,6 @@ variable "workspace_tags" {
 
 variable "store_secret" {}
 variable "key_vault_id" {}
-variable "administrator_login" {}
-variable "administrator_login_password" {}
 
 # Optional
 

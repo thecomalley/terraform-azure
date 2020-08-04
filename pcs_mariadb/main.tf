@@ -3,6 +3,18 @@ resource "azurerm_resource_group" "main" {
   location = var.module_info.location
 }
 
+resource "random_string" "random" {
+  length = 16
+  special = true
+  override_special = "/@£$"
+}
+
+resource "random_password" "password" {
+  length = 16
+  special = true
+  override_special = "_%@"
+}
+
 resource "azurerm_mariadb_server" "main" {
   name                = "mariadb-svr-basic"
   resource_group_name = azurerm_resource_group.main.name
@@ -16,16 +28,25 @@ resource "azurerm_mariadb_server" "main" {
     auto_grow                  = var.auto_grow
   }
 
-  administrator_login          = var.administrator_login
-  administrator_login_password = var.administrator_login_password
+  administrator_login          = random_string.random.result
+  administrator_login_password = random_password.password.result
   version                      = var.mariadb_version
   ssl_enforcement              = var.ssl_enforcement
   tags                         = local.merged_tags
 }
 
-resource "azurerm_key_vault_secret" "module" {
+resource "azurerm_key_vault_secret" "username" {
   count                        = var.store_secret ? 1 : 0
-  name                         = azurerm_mariadb_server.main.administrator_login
+  name                         = "${azurerm_mariadb_server.main.name}-username"
+  content_type                 = "username"
+  value                        = azurerm_mariadb_server.main.administrator_login
+  key_vault_id                 = var.key_vault_id
+}
+
+resource "azurerm_key_vault_secret" "password" {
+  count                        = var.store_secret ? 1 : 0
+  name                         = "${azurerm_mariadb_server.main.name}-password"
+  content_type                 = "password"
   value                        = azurerm_mariadb_server.main.administrator_login_password
   key_vault_id                 = var.key_vault_id
 }
