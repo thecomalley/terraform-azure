@@ -19,7 +19,7 @@ resource "azurerm_automation_module" "azaccounts" {
   automation_account_name = azurerm_automation_account.this.name
 
   module_link {
-    uri = "https://www.powershellgallery.com/api/v2/package/Az.Accounts/1.9.1"
+    uri = "https://github.com/thecomalley/terraform-azure/raw/master/pcs_automation/modules/az.accounts.1.9.1.zip"
   }
 }
 
@@ -29,7 +29,7 @@ resource "azurerm_automation_module" "azresources" {
   automation_account_name = azurerm_automation_account.this.name
 
   module_link {
-    uri = "https://www.powershellgallery.com/api/v2/package/Az.Resources/1.1.2"
+    uri = "https://github.com/thecomalley/terraform-azure/raw/master/pcs_automation/modules/az.resources.1.1.2.zip"
   }
 }
 
