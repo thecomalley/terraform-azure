@@ -9,6 +9,16 @@ provider "azurerm" {
   features {}
 }
 
+provider "mysql" {
+  endpoint = "my-database.example.com:3306"
+  username = "app-user"
+  password = "app-password"
+}
+
+
+
+
+
 # Configure remote state backend
 terraform {
   backend "remote" {
@@ -65,8 +75,6 @@ module "pcs_mariadb" {
   
   store_secret                 = true
   key_vault_id                 = module.pcs_keyvault.id
-  administrator_login          = "omadmin"
-  administrator_login_password = "dsasdlnQwdTgasd314"
   ssl_enforcement              = "Disabled"
 
   workspace_tags               = var.workspace_tags
