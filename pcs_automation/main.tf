@@ -33,6 +33,36 @@ resource "azurerm_automation_module" "azresources" {
   }
 }
 
+resource "azurerm_automation_runbook" "empty-rgs" {
+  name                    = "Az-delete-empty-rgs"
+  location                = azurerm_resource_group.this.location
+  resource_group_name     = azurerm_resource_group.this.name
+  automation_account_name = azurerm_automation_account.this.name
+  log_verbose             = "true"
+  log_progress            = "true"
+  description             = "Delete empty resource groups"
+  runbook_type            = "PowerShell"
+
+  publish_content_link {
+    uri = "https://raw.githubusercontent.com/thecomalley/terraform-azure/master/pcs_automation/runbooks/Az-delete-empty-rgs.ps1"
+  }
+}
+
+resource "azurerm_automation_runbook" "untagged-resources" {
+  name                    = "delete-untagged-resources"
+  location                = azurerm_resource_group.this.location
+  resource_group_name     = azurerm_resource_group.this.name
+  automation_account_name = azurerm_automation_account.this.name
+  log_verbose             = "true"
+  log_progress            = "true"
+  description             = "Delete empty resource groups"
+  runbook_type            = "PowerShell"
+
+  publish_content_link {
+    uri = "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/c4935ffb69246a6058eb24f54640f53f69d3ac9f/101-automation-runbook-getvms/Runbooks/Get-AzureVMTutorial.ps1"
+  }
+}
+
 locals {
   # merge module_info with workspace tags
   merged_tags      = merge(var.workspace_tags,var.module_info)
