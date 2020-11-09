@@ -3,7 +3,6 @@ resource "azurerm_resource_group" "this" {
   location = var.module_info.location
 }
 
-
 resource "azurerm_automation_account" "this" {
   name                  = "pcs-automation-account"
   location              = azurerm_resource_group.this.location
@@ -11,26 +10,6 @@ resource "azurerm_automation_account" "this" {
   sku_name              = "Basic"
   tags                  = local.merged_tags
 
-}
-
-resource "azurerm_automation_module" "azaccounts" {
-  name                    = "Az.Accounts-1.9.1"
-  resource_group_name     = azurerm_resource_group.this.name
-  automation_account_name = azurerm_automation_account.this.name
-
-  module_link {
-    uri = "https://github.com/thecomalley/terraform-azure/raw/master/pcs_automation/modules/az.accounts.1.9.1.zip"
-  }
-}
-
-resource "azurerm_automation_module" "azresources" {
-  name                    = "Az.Resources-1.1.2"
-  resource_group_name     = azurerm_resource_group.this.name
-  automation_account_name = azurerm_automation_account.this.name
-
-  module_link {
-    uri = "https://github.com/thecomalley/terraform-azure/raw/master/pcs_automation/modules/az.resources.1.1.2.zip"
-  }
 }
 
 resource "azurerm_automation_runbook" "empty-rgs" {
