@@ -10,6 +10,9 @@
 #authentication
 $connectionName = "AzureRunAsConnection"
 
+# Import-Module Az.Accounts
+Import-Module -Name Az.Accounts -RequiredVersion 2.1.2 
+
 try
 {
     # Get the connection "AzureRunAsConnection "
