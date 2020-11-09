@@ -3,6 +3,7 @@ resource "azurerm_resource_group" "this" {
   location = var.module_info.location
 }
 
+
 resource "azurerm_automation_account" "this" {
   name                  = "pcs-automation-account"
   location              = azurerm_resource_group.this.location
@@ -10,6 +11,16 @@ resource "azurerm_automation_account" "this" {
   sku_name              = "Basic"
   tags                  = local.merged_tags
 
+}
+
+resource "azurerm_automation_module" "az" {
+  name                    = "az-4.8.0"
+  resource_group_name     = azurerm_resource_group.this.name
+  automation_account_name = azurerm_automation_account.this.name
+
+  module_link {
+    uri = "https://www.powershellgallery.com/packages/Az/4.8.0"
+  }
 }
 
 resource "azurerm_automation_runbook" "empty-rgs" {
