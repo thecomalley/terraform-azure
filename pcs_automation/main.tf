@@ -14,7 +14,7 @@ resource "azurerm_automation_account" "this" {
 }
 
 resource "azurerm_automation_module" "AzAccounts" {
-  name                    = "Az.Accounts-v2.1.2"
+  name                    = "Az.Accounts"
   resource_group_name     = azurerm_resource_group.this.name
   automation_account_name = azurerm_automation_account.this.name
 
