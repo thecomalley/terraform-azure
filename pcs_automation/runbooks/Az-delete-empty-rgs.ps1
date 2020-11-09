@@ -10,6 +10,11 @@
 #authentication
 $connectionName = "AzureRunAsConnection"
 
+# Install Az version 3.6.1
+Install-Module -Name Az -RequiredVersion 3.6.1
+# Load Az version 3.6.1
+Import-Module -Name Az -RequiredVersion 3.6.1
+
 try
 {
     # Get the connection "AzureRunAsConnection "
