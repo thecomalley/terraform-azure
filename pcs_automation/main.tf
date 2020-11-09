@@ -13,13 +13,13 @@ resource "azurerm_automation_account" "this" {
 
 }
 
-resource "azurerm_automation_module" "az" {
-  name                    = "az-4.8.0"
+resource "azurerm_automation_module" "AzAccounts" {
+  name                    = "Az.Accounts-v2.1.2"
   resource_group_name     = azurerm_resource_group.this.name
   automation_account_name = azurerm_automation_account.this.name
 
   module_link {
-    uri = "https://www.powershellgallery.com/packages/Az/4.8.0"
+    uri = "https://github.com/Azure/azure-powershell/archive/Az.Accounts-v2.1.2.zip"
   }
 }
 
