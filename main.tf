@@ -15,10 +15,6 @@ provider "mysql" {
   password = "app-password"
 }
 
-
-
-
-
 # Configure remote state backend
 terraform {
   backend "remote" {
